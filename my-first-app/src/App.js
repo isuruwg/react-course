@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
+/* eslint-disable require-jsdoc */
+import React, {Component} from 'react';
 import './App.css';
 
 class App extends Component {
@@ -9,7 +9,6 @@ class App extends Component {
         <h1>Hi, I'm a React App</h1>
       </div>
     );
-    // return React.createElement('div', {className: 'App'}, React.createElement('h1',null, 'Hi, I\'m a React App'));
   }
 }
 

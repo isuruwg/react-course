@@ -6,6 +6,7 @@ My work from [React - The Complete Guide](https://www.udemy.com/course/react-the
 - [1. Getting Started](#1-getting-started)
   - [1.1. Creating a react app](#11-creating-a-react-app)
   - [1.2. Starting the app](#12-starting-the-app)
+  - [Setting up a linter](#setting-up-a-linter)
 - [2. Next Generation JavaScript](#2-next-generation-javascript)
 - [3. Base Features and Syntax](#3-base-features-and-syntax)
   - [Different files in the app](#different-files-in-the-app)
@@ -31,6 +32,27 @@ This will create the same app structure as used in the course.
 cd my-first-app
 yarn start
 ```
+
+## Setting up a linter
+
+We'll use [ESLint](https://eslint.org/) as a JavaScript Linter [[ref]](https://eslint.org/docs/user-guide/getting-started).
+
+1. Add ESLint to your project by doing:
+
+    ```bash
+    yarn add eslint --dev
+    # or
+    # npm install eslint --save-dev
+    ```
+2. Init ESLint to set up a configuration file
+
+    ```bash
+    yarn run eslint --init
+    # or
+    # npx eslint --init
+    ```
+3. Install the [ESLint extension](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) for VSCode if you are using VSCode [[ref]](https://www.digitalocean.com/community/tutorials/linting-and-formatting-with-eslint-in-vs-code).
+
 
 # 2. Next Generation JavaScript
 
