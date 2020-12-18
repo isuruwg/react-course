@@ -6,15 +6,18 @@ My work from [React - The Complete Guide](https://www.udemy.com/course/react-the
 - [1. Getting Started](#1-getting-started)
   - [1.1. Creating a react app](#11-creating-a-react-app)
   - [1.2. Starting the app](#12-starting-the-app)
-  - [1.3. Setting up a linter](#13-setting-up-a-linter)
+  - [1.3. Setting up a linter [OBSOLETE INSTRUCTION]](#13-setting-up-a-linter-obsolete-instruction)
 - [2. Next Generation JavaScript](#2-next-generation-javascript)
 - [3. Base Features and Syntax](#3-base-features-and-syntax)
   - [3.1. Different files in the app](#31-different-files-in-the-app)
   - [3.2. JSX](#32-jsx)
   - [3.3. Create a new component](#33-create-a-new-component)
-    - [3.3.1. Including dynamic content](#331-including-dynamic-content)
-    - [3.3.2. Props](#332-props)
-      - [props.children](#propschildren)
+  - [3.4. Including dynamic content](#34-including-dynamic-content)
+    - [3.4.1. Props](#341-props)
+      - [3.4.1.1. props.children](#3411-propschildren)
+    - [3.4.2. State](#342-state)
+      - [Changing state](#changing-state)
+  - [3.5. Event Handlers](#35-event-handlers)
 
 # 1. Getting Started
 
@@ -37,7 +40,9 @@ cd my-first-app
 yarn start
 ```
 
-## 1.3. Setting up a linter
+## 1.3. Setting up a linter [OBSOLETE INSTRUCTION]
+
+**THIS SECTION IS NOT NEEDED AS REACT COMES WITH A BUILT IN LINTER**
 
 We'll use [ESLint](https://eslint.org/) as a JavaScript Linter [[ref]](https://eslint.org/docs/user-guide/getting-started).
 
@@ -142,7 +147,7 @@ export default App;
 
 Please also refer to [../components.pdf](../components.pdf)
 
-### 3.3.1. Including dynamic content
+## 3.4. Including dynamic content
 
 You can include dynamic content by putting them inside `{}`
 
@@ -152,7 +157,7 @@ const person = () => {
 };
 ```
 
-### 3.3.2. Props
+### 3.4.1. Props
 
 We can use props to get arguments from the calling function. (Note: Any name can be used here, does not have to be `props`)
 
@@ -163,7 +168,7 @@ const person = (props) => {
 ```
 We can pass these properties as: `<Person name="person1" age="30"/>`
 
-#### props.children
+#### 3.4.1.1. props.children
 
 `props.children` accesses anything passed as a child element.
 
@@ -179,3 +184,71 @@ const person = (props) => {
 ```
 
 We can define children as: `<Person name="bla" age="40">My Hobbies: Racing</Person>`
+
+### 3.4.2. State
+
+`Component` class has a property named `state`. Any changes to `state` or `props` makes react re-render the DOM. 
+
+example for defining and using `state`:
+
+```javascript
+class App extends Component {
+  state = {
+    persons: [
+      {name: 'person1', age: 20},
+      {name: 'bla', age: 30},
+      {name: 'bla2', age: 40}
+    ]
+  };
+  render() {
+    return (
+      <div className="App">
+        <h1>Hi, I'm a React App</h1>
+        <Person name={this.state.persons[0].name} age={this.state.persons[0].age}/>
+        <Person name={this.state.persons[1].name} age={this.state.persons[1].age}>My Hobbies: Racing</Person>
+        <Person name={this.state.persons[2].name} age={this.state.persons[2].age}/>
+      </div>
+    );
+  }
+}
+```
+
+#### Changing state
+
+`state` is a property of `Component` class and changing the `state` property should be done using `this.setState()` method.
+
+```javascript
+// DON'T DO THIS: this.state.persons[0].name = 'NEW name';
+this.setState({
+  persons: [
+      {name: 'NEW name', age: 20},
+      {name: 'bla', age: 30},
+      {name: 'bla2', age: 40}
+    ]
+  })
+```
+
+This only updates the `persons` element in `state`. Any other elements that existed within state remain untouched.
+
+
+## 3.5. Event Handlers
+
+In [src/App.js](my-first-app/src/App.js):
+
+```javascript
+<button onClick={this.switchNameHandler}>Switch Name</button>
+```
+
+```javascript
+switchNameHandler = () => {
+    this.setState({
+      persons: [
+          {name: 'NEW name', age: 20},
+          {name: 'bla', age: 30},
+          {name: 'bla2', age: 40}
+      ]
+    })
+  }
+```
+
+A full list of supported events can be found [here](https://reactjs.org/docs/events.html#supported-events)
