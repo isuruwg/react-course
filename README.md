@@ -14,6 +14,7 @@ My work from [React - The Complete Guide](https://www.udemy.com/course/react-the
   - [3.3. Create a new component](#33-create-a-new-component)
     - [3.3.1. Including dynamic content](#331-including-dynamic-content)
     - [3.3.2. Props](#332-props)
+      - [props.children](#propschildren)
 
 # 1. Getting Started
 
@@ -160,6 +161,21 @@ const person = (props) => {
     return <p>I'm {props.name}! I am {props.age} years old</p>;
 };
 ```
+We can pass these properties as: `<Person name="person1" age="30"/>`
 
-`<Person name="person1" age="30"/>`
+#### props.children
 
+`props.children` accesses anything passed as a child element.
+
+```javascript
+const person = (props) => {
+    return (
+        <div>
+            <p>I'm {props.name}! I am {props.age} years old</p>
+            <p>{props.children}</p>
+        </div>        
+    )
+};
+```
+
+We can define children as: `<Person name="bla" age="40">My Hobbies: Racing</Person>`
