@@ -6,11 +6,12 @@ My work from [React - The Complete Guide](https://www.udemy.com/course/react-the
 - [1. Getting Started](#1-getting-started)
   - [1.1. Creating a react app](#11-creating-a-react-app)
   - [1.2. Starting the app](#12-starting-the-app)
-  - [Setting up a linter](#setting-up-a-linter)
+  - [1.3. Setting up a linter](#13-setting-up-a-linter)
 - [2. Next Generation JavaScript](#2-next-generation-javascript)
 - [3. Base Features and Syntax](#3-base-features-and-syntax)
-  - [Different files in the app](#different-files-in-the-app)
-  - [JSX](#jsx)
+  - [3.1. Different files in the app](#31-different-files-in-the-app)
+  - [3.2. JSX](#32-jsx)
+  - [Create a new component](#create-a-new-component)
 
 # 1. Getting Started
 
@@ -33,7 +34,7 @@ cd my-first-app
 yarn start
 ```
 
-## Setting up a linter
+## 1.3. Setting up a linter
 
 We'll use [ESLint](https://eslint.org/) as a JavaScript Linter [[ref]](https://eslint.org/docs/user-guide/getting-started).
 
@@ -51,8 +52,20 @@ We'll use [ESLint](https://eslint.org/) as a JavaScript Linter [[ref]](https://e
     # or
     # npx eslint --init
     ```
+    For this project, I chose the following options:
+    ```
+    ✔ How would you like to use ESLint? · To check syntax, find problems, and enforce code style
+    ✔ What type of modules does your project use? · JavaScript modules (import/export)
+    ✔ Which framework does your project use? · react
+    ✔ Does your project use TypeScript? · No
+    ✔ Where does your code run? · node
+    ✔ How would you like to define a style for your project? · guide
+    ✔ Which style guide do you want to follow? · airbnb
+    ✔ What format do you want your config file to be in? · JSON
+    ```
 3. Install the [ESLint extension](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) for VSCode if you are using VSCode [[ref]](https://www.digitalocean.com/community/tutorials/linting-and-formatting-with-eslint-in-vs-code).
 
+**Note**: Temporarily removed ESLint because of issue: `Module build failed: Error: Cannot find module 'eslint/lib/formatters/stylish'`. References for fixing: [1](https://github.com/webpack-contrib/eslint-loader/issues/272), [2](https://github.com/webpack-contrib/eslint-loader/issues/271), [3](https://github.com/eslint/eslint/issues/11910), [4](https://github.com/facebook/create-react-app/issues/3617)
 
 # 2. Next Generation JavaScript
 
@@ -60,11 +73,11 @@ We'll use [ESLint](https://eslint.org/) as a JavaScript Linter [[ref]](https://e
 
 Please create a new app by following the guidelines in the [Getting Started](#1-getting-started) section above.
 
-## Different files in the app
+## 3.1. Different files in the app
 
 The [src/index.js](my-first-app/src/index.js) imports the App from src/App.js and renders it inside the `root` element defined in [public/index.html](my-first-app/public/index.html)
 
-## JSX
+## 3.2. JSX
 
 jsx allows us to write HTML like code inside javascript. However, there are some limitations, for example in the above div, when we want to specify a class for styling, we have to use `className` instead of `class` as we would have used in an html file.
 
@@ -89,3 +102,39 @@ class App extends Component {
   }
 }
 ```
+## Create a new component
+
+Let's create a new component, for this, we'll create a folder named [Person](my-first-app/src/Person)
+
+```javascript
+import React from 'react';
+
+const person = () => {
+    return <p>I'm a Person!</p>;
+};
+
+export default person;
+```
+
+Now let's import it in [App.js](my-first-app/src/App.js) and render it in our page:
+
+```javascript
+import React, {Component} from 'react';
+import './App.css';
+import Person from './Person/Person';
+
+class App extends Component {
+  render() {
+    return (
+      <div className="App">
+        <h1>Hi, I'm a React App</h1>
+        <Person/>
+      </div>      
+    );
+  }
+}
+
+export default App;
+```
+
+Please also refer to [../components.pdf](../components.pdf)

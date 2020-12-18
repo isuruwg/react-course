@@ -12,10 +12,5 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
-  },
-  "devDependencies": {
-    "eslint": "^7.15.0",
-    "eslint-config-google": "^0.14.0",
-    "eslint-plugin-react": "^7.21.5"
   }
 }
