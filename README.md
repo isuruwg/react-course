@@ -195,11 +195,15 @@ this.setState({
 
 This only updates the `persons` element in `state`. Any other elements that existed within state remain untouched.
 
+Refer to [resources/state-learning-card.pdf](../resources/state-learning-card.pdf) for more details.
+
 #### 3.4.2.2. Using useState() Hook for state manipulation
 
 Hooks were introduced starting from React 16.8. If our application didn't use `class App extends Component` and instead defined `app` as a function in the code below, we wouldn't have access to `state` element. In this case we can use `useState` Hook as shown in the file below. 
 
 An important difference between `useState()` and `Component.state` is how they are updated. `useState()` returns an array of two elements. The `state` and a method to `setState`. However, the `setState` method overwrites everything that was in `state`. Therefore when we require multiple elements in state, the best practice is to use `useState` multiple times to define different elements and update them individually as shown in the code snippet below with `otherState`.
+
+Refer to [resources/usestate-learning-card.pdf](../resources/usestate-learning-card.pdf) for more details.
 
 ```javascript
 import React, { useState } from 'react';
