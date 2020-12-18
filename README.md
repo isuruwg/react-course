@@ -16,6 +16,7 @@ My work from [React - The Complete Guide](https://www.udemy.com/course/react-the
       - [3.4.1.1. props.children](#3411-propschildren)
     - [3.4.2. State](#342-state)
       - [3.4.2.1. Changing state](#3421-changing-state)
+      - [3.4.2.2. Using useState() Hook for state manipulation](#3422-using-usestate-hook-for-state-manipulation)
   - [3.5. Event Handlers](#35-event-handlers)
 
 # 1. Getting Started
@@ -109,7 +110,7 @@ class App extends Component {
 export default App;
 ```
 
-Please also refer to [../components.pdf](../components.pdf)
+Please also refer to [../components.pdf](../resources/components.pdf)
 
 ## 3.4. Including dynamic content
 
@@ -193,6 +194,66 @@ this.setState({
 ```
 
 This only updates the `persons` element in `state`. Any other elements that existed within state remain untouched.
+
+#### 3.4.2.2. Using useState() Hook for state manipulation
+
+Hooks were introduced starting from React 16.8. If our application didn't use `class App extends Component` and instead defined `app` as a function in the code below, we wouldn't have access to `state` element. In this case we can use `useState` Hook as shown in the file below. 
+
+An important difference between `useState()` and `Component.state` is how they are updated. `useState()` returns an array of two elements. The `state` and a method to `setState`. However, the `setState` method overwrites everything that was in `state`. Therefore when we require multiple elements in state, the best practice is to use `useState` multiple times to define different elements and update them individually as shown in the code snippet below with `otherState`.
+
+```javascript
+import React, { useState } from 'react';
+import './App.css';
+import Person from './Person/Person';
+
+const app = props => {
+  const [personsState, setPersonsState] = useState({
+    persons: [
+      { name: 'Max', age: 28 },
+      { name: 'Manu', age: 29 },
+      { name: 'Stephanie', age: 26 }
+    ]
+  });
+
+  const [otherState, setOtherState] = useState('some other value');
+
+  console.log(personsState, otherState);
+
+  const switchNameHandler = () => {
+    setPersonsState({
+      persons: [
+        { name: 'Maximilian', age: 28 },
+        { name: 'Manu', age: 29 },
+        { name: 'Stephanie', age: 27 }
+      ]
+    });
+  };
+
+  return (
+    <div className="App">
+      <h1>Hi, I'm a React App</h1>
+      <p>This is really working!</p>
+      <button onClick={switchNameHandler}>Switch Name</button>
+      <Person
+        name={personsState.persons[0].name}
+        age={personsState.persons[0].age}
+      />
+      <Person
+        name={personsState.persons[1].name}
+        age={personsState.persons[1].age}
+      >
+        My Hobbies: Racing
+      </Person>
+      <Person
+        name={personsState.persons[2].name}
+        age={personsState.persons[2].age}
+      />
+    </div>
+  );
+};
+
+export default app;
+```
 
 
 ## 3.5. Event Handlers
