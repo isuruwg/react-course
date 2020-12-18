@@ -6,7 +6,6 @@ My work from [React - The Complete Guide](https://www.udemy.com/course/react-the
 - [1. Getting Started](#1-getting-started)
   - [1.1. Creating a react app](#11-creating-a-react-app)
   - [1.2. Starting the app](#12-starting-the-app)
-  - [1.3. Setting up a linter [OBSOLETE INSTRUCTION]](#13-setting-up-a-linter-obsolete-instruction)
 - [2. Next Generation JavaScript](#2-next-generation-javascript)
 - [3. Base Features and Syntax](#3-base-features-and-syntax)
   - [3.1. Different files in the app](#31-different-files-in-the-app)
@@ -16,7 +15,7 @@ My work from [React - The Complete Guide](https://www.udemy.com/course/react-the
     - [3.4.1. Props](#341-props)
       - [3.4.1.1. props.children](#3411-propschildren)
     - [3.4.2. State](#342-state)
-      - [Changing state](#changing-state)
+      - [3.4.2.1. Changing state](#3421-changing-state)
   - [3.5. Event Handlers](#35-event-handlers)
 
 # 1. Getting Started
@@ -39,41 +38,6 @@ This will create the same app structure as used in the course.
 cd my-first-app
 yarn start
 ```
-
-## 1.3. Setting up a linter [OBSOLETE INSTRUCTION]
-
-**THIS SECTION IS NOT NEEDED AS REACT COMES WITH A BUILT IN LINTER**
-
-We'll use [ESLint](https://eslint.org/) as a JavaScript Linter [[ref]](https://eslint.org/docs/user-guide/getting-started).
-
-1. Add ESLint to your project by doing:
-
-    ```bash
-    yarn add eslint --dev
-    # or
-    # npm install eslint --save-dev
-    ```
-2. Init ESLint to set up a configuration file
-
-    ```bash
-    yarn run eslint --init
-    # or
-    # npx eslint --init
-    ```
-    For this project, I chose the following options:
-    ```
-    ✔ How would you like to use ESLint? · To check syntax, find problems, and enforce code style
-    ✔ What type of modules does your project use? · JavaScript modules (import/export)
-    ✔ Which framework does your project use? · react
-    ✔ Does your project use TypeScript? · No
-    ✔ Where does your code run? · node
-    ✔ How would you like to define a style for your project? · guide
-    ✔ Which style guide do you want to follow? · airbnb
-    ✔ What format do you want your config file to be in? · JSON
-    ```
-3. Install the [ESLint extension](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) for VSCode if you are using VSCode [[ref]](https://www.digitalocean.com/community/tutorials/linting-and-formatting-with-eslint-in-vs-code).
-
-**Note**: Temporarily removed ESLint because of issue: `Module build failed: Error: Cannot find module 'eslint/lib/formatters/stylish'`. References for fixing: [1](https://github.com/webpack-contrib/eslint-loader/issues/272), [2](https://github.com/webpack-contrib/eslint-loader/issues/271), [3](https://github.com/eslint/eslint/issues/11910), [4](https://github.com/facebook/create-react-app/issues/3617)
 
 # 2. Next Generation JavaScript
 
@@ -213,7 +177,7 @@ class App extends Component {
 }
 ```
 
-#### Changing state
+#### 3.4.2.1. Changing state
 
 `state` is a property of `Component` class and changing the `state` property should be done using `this.setState()` method.
 
