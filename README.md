@@ -11,7 +11,9 @@ My work from [React - The Complete Guide](https://www.udemy.com/course/react-the
 - [3. Base Features and Syntax](#3-base-features-and-syntax)
   - [3.1. Different files in the app](#31-different-files-in-the-app)
   - [3.2. JSX](#32-jsx)
-  - [Create a new component](#create-a-new-component)
+  - [3.3. Create a new component](#33-create-a-new-component)
+    - [3.3.1. Including dynamic content](#331-including-dynamic-content)
+    - [3.3.2. Props](#332-props)
 
 # 1. Getting Started
 
@@ -102,7 +104,7 @@ class App extends Component {
   }
 }
 ```
-## Create a new component
+## 3.3. Create a new component
 
 Let's create a new component, for this, we'll create a folder named [Person](my-first-app/src/Person)
 
@@ -138,3 +140,26 @@ export default App;
 ```
 
 Please also refer to [../components.pdf](../components.pdf)
+
+### 3.3.1. Including dynamic content
+
+You can include dynamic content by putting them inside `{}`
+
+```javascript
+const person = () => {
+    return <p>I'm a Person! I am {Math.floor(Math.random()*30)} years old</p>;
+};
+```
+
+### 3.3.2. Props
+
+We can use props to get arguments from the calling function. (Note: Any name can be used here, does not have to be `props`)
+
+```javascript
+const person = (props) => {
+    return <p>I'm {props.name}! I am {props.age} years old</p>;
+};
+```
+
+`<Person name="person1" age="30"/>`
+
