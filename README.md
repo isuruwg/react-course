@@ -133,6 +133,8 @@ const person = (props) => {
 ```
 We can pass these properties as: `<Person name="person1" age="30"/>`
 
+We can also pass method references in the same way. You can see more details in the [event handlers](#method-ref-passing) section.
+
 #### 3.4.1.1. props.children
 
 `props.children` accesses anything passed as a child element.
@@ -177,6 +179,8 @@ class App extends Component {
   }
 }
 ```
+
+Best practice note: Only use state in a few main components of your app. Don't use state everywhere as it would get difficult to manage state. 
 
 #### 3.4.2.1. Changing state
 
@@ -281,3 +285,56 @@ switchNameHandler = () => {
 ```
 
 A full list of supported events can be found [here](https://reactjs.org/docs/events.html#supported-events)
+
+<a id="method-ref-passing"></a>You can pass method references between components. You can see this in action in [src/App.js](my-first-app/src/App.js) passing the `switchNameHandler` into `person` in [src/Person.js](my-first-app/src/Person/Person.js)
+
+in `App.js`:
+
+```javascript
+<Person 
+  name={this.state.persons[1].name} 
+  age={this.state.persons[1].age}
+  click={this.switchNameHandler}>My Hobbies: Racing</Person>
+```
+
+in `Person.js`
+
+```javascript
+const person = (props) => {
+    return (
+        <div>
+            <p onClick={props.click}>I'm {props.name}! I am {props.age} years old</p>
+            <p>{props.children}</p>
+        </div>        
+    )
+};
+```
+
+If we want to pass parameters to the `switchNameHandler` function, there are two ways to do this:
+
+1. `bind` can be used for passing parameters as follows:
+
+    ```javascript
+    switchNameHandler = (newName) => {
+        this.setState({
+          persons: [
+              {name: newName, age: 20},
+              {name: 'bla', age: 30},
+              {name: 'bla2', age: 40}
+          ]
+        })
+      }
+    ```
+
+    ```javascript
+    <button onClick={this.switchNameHandler.bind(this, 'NEW name')}>Switch Name</button>
+    ```
+
+    We don't have to do the `bind` if we don't have any parameters to pass as the arrow functions handle the `this` property.
+
+2. Using arrow functions: This is another way of doing this, however, this is not recommended as this can make the app slow because of react re-rendring our app.
+
+    ```javascript
+    <button onClick={() => this.switchNameHandler('NEW name')}>Switch Name</button>
+    ```
+
