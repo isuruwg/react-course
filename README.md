@@ -18,6 +18,9 @@ My work from [React - The Complete Guide](https://www.udemy.com/course/react-the
       - [3.4.2.1. Changing state](#3421-changing-state)
       - [3.4.2.2. Using useState() Hook for state manipulation](#3422-using-usestate-hook-for-state-manipulation)
   - [3.5. Event Handlers](#35-event-handlers)
+  - [3.6. Adding Styling](#36-adding-styling)
+    - [3.6.1. With Stylesheets](#361-with-stylesheets)
+    - [3.6.2. With inline styles](#362-with-inline-styles)
 
 # 1. Getting Started
 
@@ -338,3 +341,64 @@ If we want to pass parameters to the `switchNameHandler` function, there are two
     <button onClick={() => this.switchNameHandler('NEW name')}>Switch Name</button>
     ```
 
+## 3.6. Adding Styling
+
+### 3.6.1. With Stylesheets
+
+Let's create a [Person/Person.css](my-first-app/src/Person/Person.css)
+
+```css
+.Person {
+    width: 60%;
+    margin: 16px auto;
+    border: 1px solid #eee;
+    box-shadow: 0 2px 3px #ccc;
+    padding: 16px;
+    text-align: center;
+}
+```
+
+We would need to import the css in [Person/Person.js](my-first-app/src/Person/Person.js) as `import './Person.css'`. 
+
+```javascript
+import './Person.css'
+.........
+        <div className="Person">
+........
+        </div>        
+........
+```
+
+React also handles automatic prefixes for the styles so that the app would work in multiple browsers:
+eg: `box-shadow` and `webkit-box-shadow` are both present on our browser rendered page.
+
+### 3.6.2. With inline styles
+
+We'll do an inline style for our button in [src/App.js](my-first-app/src/App.js)
+
+```javascript
+.........
+class App extends Component {
+  .......
+
+  render() {
+    const style = {
+      backgroundColor: 'white',
+      font: 'inherit',
+      border: '1px solid blue',
+      padding: '8px',
+      cursor: 'pointer'
+    };
+    return (
+      <div className="App">
+        .........
+        <button 
+          style={style}
+          onClick={() => this.switchNameHandler('NEW name')}>Switch Name</button>
+       ...........
+      </div>
+    );
+  }
+}
+......
+```
