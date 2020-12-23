@@ -18,6 +18,7 @@ My work from [React - The Complete Guide](https://www.udemy.com/course/react-the
       - [3.4.2.1. Changing state](#3421-changing-state)
       - [3.4.2.2. Using useState() Hook for state manipulation](#3422-using-usestate-hook-for-state-manipulation)
   - [3.5. Event Handlers](#35-event-handlers)
+    - [3.5.1. Two way binding](#351-two-way-binding)
   - [3.6. Adding Styling](#36-adding-styling)
     - [3.6.1. With Stylesheets](#361-with-stylesheets)
     - [3.6.2. With inline styles](#362-with-inline-styles)
@@ -340,6 +341,11 @@ If we want to pass parameters to the `switchNameHandler` function, there are two
     ```javascript
     <button onClick={() => this.switchNameHandler('NEW name')}>Switch Name</button>
     ```
+### 3.5.1. Two way binding
+
+[Assignment01](Assignments/assignment-01/README.md) shows an example of two way binding an input field.
+
+In the assignment, the `UserInput` input field is bound to the value of the `state.username` while `state.username` is changed by changes to the `UserInput` input field using an `inputChangedHandler` change handler.
 
 ## 3.6. Adding Styling
 
