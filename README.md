@@ -22,6 +22,8 @@ My work from [React - The Complete Guide](https://www.udemy.com/course/react-the
   - [3.6. Adding Styling](#36-adding-styling)
     - [3.6.1. With Stylesheets](#361-with-stylesheets)
     - [3.6.2. With inline styles](#362-with-inline-styles)
+- [4. Lists and Conditionals](#4-lists-and-conditionals)
+  - [Simple conditional](#simple-conditional)
 
 # 1. Getting Started
 
@@ -407,4 +409,44 @@ class App extends Component {
   }
 }
 ......
+```
+
+# 4. Lists and Conditionals
+
+## Simple conditional
+
+As we can include javascript code within jsx by enclosing them inside `{}` we can add simple conditionals as shown below where we only show the `<div>` with persons if `state.showPersons` is true. However, note that this syntax can't be used for complex expressions like `if` statements.
+
+```javascript
+//...........
+
+class App extends Component {
+  state = {
+    //..........
+    showPersons: false
+  };
+
+  togglePersonsHandler = () => {
+    const doesShow = this.state.showPersons;
+    this.setState({showPersons: !doesShow});
+  }
+
+  render() {
+    //........
+    return (
+      <div className="App">
+        <button 
+          onClick={this.togglePersonsHandler}>Toggle Persons</button>
+        { this.state.showPersons ?
+          <div>
+            <Person 
+              name={this.state.persons[0].name} 
+              age={this.state.persons[0].age}/>            
+          </div> : null
+        }        
+      </div>
+    );
+  }
+}
+//.....
 ```
