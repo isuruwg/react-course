@@ -25,6 +25,8 @@ My work from [React - The Complete Guide](https://www.udemy.com/course/react-the
 - [4. Lists and Conditionals](#4-lists-and-conditionals)
   - [4.1. Simple conditional](#41-simple-conditional)
   - [4.2. Conditional rendering in the proper javascript way](#42-conditional-rendering-in-the-proper-javascript-way)
+  - [4.3. Outputting lists](#43-outputting-lists)
+  - [Lists and state](#lists-and-state)
 
 # 1. Getting Started
 
@@ -495,3 +497,89 @@ class App extends Component {
 //.....
 ```
 
+## 4.3. Outputting lists
+
+We'll use the `map` method to reformat our list of `persons`.
+
+```javascript
+    if (this.state.showPersons){
+      persons = (
+        <div>
+          {this.state.persons.map(person => {
+            return <Person
+              name={person.name}
+              age={person.age} />
+          })}
+        </div>
+      );
+    }
+```
+This would work but will give an error about a unique key prop. We'll address this later.
+
+## Lists and state
+
+Let's say we want to delete a specific person from the state when someone clicks on that person. The simplest way to do this is to use the second parameter passed through the `map` function. `map` function passes the element and the index of the element. 
+
+```javascript
+//.....
+
+class App extends Component {
+  state = {
+    persons: [
+      {name: 'person1', age: 20},
+      {name: 'bla', age: 30},
+      {name: 'bla2', age: 40}
+    ],
+    showPersons: false
+  };
+
+  deletePersonHandler = (personIndex) => {
+    // This has a flaw as it mutates the state. This is explained below
+    const persons = this.state.persons;
+    persons.splice(personIndex, 1);
+    this.setState({persons: persons});
+  }
+  //....
+
+  render() {
+    //....
+
+    let persons = null;
+
+    if (this.state.showPersons){
+      persons = (
+        <div>
+          {this.state.persons.map((person,index) => {
+            return <Person
+              click={() => this.deletePersonHandler(index)}
+              name={person.name}
+              age={person.age} />
+          })}
+        </div>
+      );
+    }
+
+    return (
+      <div className="App">
+        <!--....--> 
+        {persons}    
+      </div>
+    );
+  }
+}
+//....
+```
+
+However, the code above has a flaw. in `deletePersonHandler` we assign `this.state.persons` to `const persons`. However since only a reference is passed to the persons array here, we are mutating the `this.state.persons` array when we make modifications to `persons`. Therefore the correct way to do the assignment is to use one of the two possible methods below:
+
+1. `const persons = this.state.persons.slice();`
+2. `const persons = [...this.state.persons];` : This method uses the ES6 spread operator `...`
+
+```javascript
+  deletePersonHandler = (personIndex) => {
+    // const persons = this.state.persons.slice();
+    const persons = [...this.state.persons];
+    persons.splice(personIndex, 1);
+    this.setState({persons: persons});
+  }
+```
