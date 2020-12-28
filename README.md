@@ -23,7 +23,8 @@ My work from [React - The Complete Guide](https://www.udemy.com/course/react-the
     - [3.6.1. With Stylesheets](#361-with-stylesheets)
     - [3.6.2. With inline styles](#362-with-inline-styles)
 - [4. Lists and Conditionals](#4-lists-and-conditionals)
-  - [Simple conditional](#simple-conditional)
+  - [4.1. Simple conditional](#41-simple-conditional)
+  - [4.2. Conditional rendering in the proper javascript way](#42-conditional-rendering-in-the-proper-javascript-way)
 
 # 1. Getting Started
 
@@ -413,7 +414,7 @@ class App extends Component {
 
 # 4. Lists and Conditionals
 
-## Simple conditional
+## 4.1. Simple conditional
 
 As we can include javascript code within jsx by enclosing them inside `{}` we can add simple conditionals as shown below where we only show the `<div>` with persons if `state.showPersons` is true. However, note that this syntax can't be used for complex expressions like `if` statements.
 
@@ -444,6 +445,49 @@ class App extends Component {
               age={this.state.persons[0].age}/>            
           </div> : null
         }        
+      </div>
+    );
+  }
+}
+//.....
+```
+
+## 4.2. Conditional rendering in the proper javascript way
+
+The way mentioned in [the section above](#41-simple-conditional) is messy and is not prefered. Since calls the `render()` method whenever our page needs to be re-rendered, we can do the conditional as shown below:
+
+```javascript
+//.........
+
+class App extends Component {
+  //........
+
+  render() {
+    //......
+
+    let persons = null;
+
+    if (this.state.showPersons){
+      persons = (
+        <div>
+          <Person 
+            name={this.state.persons[0].name} 
+            age={this.state.persons[0].age}/>
+          <Person 
+            name={this.state.persons[1].name} 
+            age={this.state.persons[1].age}
+            click={this.switchNameHandler.bind(this, 'Name from Person!')}>My Hobbies: Racing</Person>
+          <Person 
+            name={this.state.persons[2].name} 
+            age={this.state.persons[2].age}/>
+        </div>
+      );
+    }
+
+    return (
+      <div className="App">
+        <!-- ........ -->
+        {persons}    
       </div>
     );
   }
