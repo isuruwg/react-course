@@ -454,7 +454,7 @@ class App extends Component {
 
 ## 4.2. Conditional rendering in the proper javascript way
 
-The way mentioned in [the section above](#41-simple-conditional) is messy and is not prefered. Since calls the `render()` method whenever our page needs to be re-rendered, we can do the conditional as shown below:
+The way mentioned in [the sub-section above](#41-simple-conditional) is messy and is not prefered. Since calls the `render()` method whenever our page needs to be re-rendered, we can do the conditional as shown below:
 
 ```javascript
 //.........
@@ -494,3 +494,4 @@ class App extends Component {
 }
 //.....
 ```
+
