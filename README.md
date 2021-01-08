@@ -29,7 +29,7 @@ My work from [React - The Complete Guide](https://www.udemy.com/course/react-the
   - [4.2. Outputting lists](#42-outputting-lists)
     - [4.2.1. Lists and state](#421-lists-and-state)
     - [4.2.2. Lists and Keys](#422-lists-and-keys)
-    - [Flexible lists](#flexible-lists)
+    - [4.2.3. Flexible lists](#423-flexible-lists)
 
 # 1. Getting Started
 
@@ -639,7 +639,7 @@ So, we'll add a unique `id` to our persons and add it to the rendering element:
 //....
 ```
 
-### Flexible lists
+### 4.2.3. Flexible lists
 
 We can make our `Persons` list flexible by:
 
