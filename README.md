@@ -23,10 +23,13 @@ My work from [React - The Complete Guide](https://www.udemy.com/course/react-the
     - [3.6.1. With Stylesheets](#361-with-stylesheets)
     - [3.6.2. With inline styles](#362-with-inline-styles)
 - [4. Lists and Conditionals](#4-lists-and-conditionals)
-  - [4.1. Simple conditional](#41-simple-conditional)
-  - [4.2. Conditional rendering in the proper javascript way](#42-conditional-rendering-in-the-proper-javascript-way)
-  - [4.3. Outputting lists](#43-outputting-lists)
-  - [Lists and state](#lists-and-state)
+  - [4.1. Conditional rendering](#41-conditional-rendering)
+    - [4.1.1. Simple conditional](#411-simple-conditional)
+    - [4.1.2. Conditional rendering in the proper javascript way](#412-conditional-rendering-in-the-proper-javascript-way)
+  - [4.2. Outputting lists](#42-outputting-lists)
+    - [4.2.1. Lists and state](#421-lists-and-state)
+    - [4.2.2. Lists and Keys](#422-lists-and-keys)
+    - [Flexible lists](#flexible-lists)
 
 # 1. Getting Started
 
@@ -416,7 +419,9 @@ class App extends Component {
 
 # 4. Lists and Conditionals
 
-## 4.1. Simple conditional
+## 4.1. Conditional rendering
+
+### 4.1.1. Simple conditional
 
 As we can include javascript code within jsx by enclosing them inside `{}` we can add simple conditionals as shown below where we only show the `<div>` with persons if `state.showPersons` is true. However, note that this syntax can't be used for complex expressions like `if` statements.
 
@@ -454,9 +459,9 @@ class App extends Component {
 //.....
 ```
 
-## 4.2. Conditional rendering in the proper javascript way
+### 4.1.2. Conditional rendering in the proper javascript way
 
-The way mentioned in [the sub-section above](#41-simple-conditional) is messy and is not prefered. Since calls the `render()` method whenever our page needs to be re-rendered, we can do the conditional as shown below:
+The way mentioned in [the sub-section above](#411-simple-conditional) is messy and is not prefered. Since calls the `render()` method whenever our page needs to be re-rendered, we can do the conditional as shown below:
 
 ```javascript
 //.........
@@ -497,7 +502,7 @@ class App extends Component {
 //.....
 ```
 
-## 4.3. Outputting lists
+## 4.2. Outputting lists
 
 We'll use the `map` method to reformat our list of `persons`.
 
@@ -516,7 +521,7 @@ We'll use the `map` method to reformat our list of `persons`.
 ```
 This would work but will give an error about a unique key prop. We'll address this later.
 
-## Lists and state
+### 4.2.1. Lists and state
 
 Let's say we want to delete a specific person from the state when someone clicks on that person. The simplest way to do this is to use the second parameter passed through the `map` function. `map` function passes the element and the index of the element. 
 
@@ -583,3 +588,130 @@ However, the code above has a flaw. in `deletePersonHandler` we assign `this.sta
     this.setState({persons: persons});
   }
 ```
+
+### 4.2.2. Lists and Keys
+
+When we were outputting lists in the [sub-section above](#42-outputting-lists) we got the following error:
+
+```
+Warning: Each child in a list should have a unique "key" prop.
+
+See https://reactjs.org/link/warning-keys for more information.
+```
+
+Keys help React identify which items have changed, are added, or are removed. Keys should be given to the elements inside the array to give the elements a stable identity [source](https://reactjs.org/docs/lists-and-keys.html#keys).
+
+So it's a good practice to give a unique key to each element when rendering a list. We can use something like the `id` of an element to do this. However, as a last resort, you can also use the item index as a key if you don't have stable `id`s for elements. However, this is not recommended can lead to issues as shown [here](https://reactjs.org/docs/lists-and-keys.html#keys). 
+
+So, we'll add a unique `id` to our persons and add it to the rendering element:
+
+```javascript
+//.....
+  state = {
+    persons: [
+      {id: 'lksdaog', name: 'person1', age: 20},
+      {id: 'dkajsog', name: 'bla', age: 30},
+      {id: 'soeorug',name: 'bla2', age: 40}
+    ],
+    showPersons: false
+  };
+
+  //....
+
+  render() {
+    //.....
+
+    let persons = null;
+
+    if (this.state.showPersons){
+      persons = (
+        <div>
+          {this.state.persons.map((person,index) => {
+            return <Person
+              click={() => this.deletePersonHandler(index)}
+              name={person.name}
+              age={person.age} 
+              key={person.id}/>
+          })}
+        </div>
+      );
+    }
+//....
+```
+
+### Flexible lists
+
+We can make our `Persons` list flexible by:
+
+[Person.js](my-first-app/src/Person/Person.js)
+```javascript
+//...
+const person = (props) => {
+    return (
+        <div className="Person">
+            <p onClick={props.click}>I'm {props.name}! I am {props.age} years old</p>            
+            <p>{props.children}</p>
+            <input type="text" onChange={props.changed} value={props.name}/>
+        </div>        
+    )
+};
+//...
+```
+
+[App.js](my-first-app/src/App.js)
+```javascript
+//...
+class App extends Component {
+  state = {
+    persons: [
+      {id: 'lksdaog', name: 'person1', age: 20},
+      {id: 'dkajsog', name: 'bla', age: 30},
+      {id: 'soeorug',name: 'bla2', age: 40}
+    ],
+    showPersons: false
+  };
+
+  nameChangedHandler = (event, id) => {
+    /* findIndex runs through all the elements and returns the index of the
+    first element in the array that satisfies the provided testing function. 
+    Otherwise, it returns -1 */
+    const personIndex = this.state.persons.findIndex(p => {
+      return p.id === id;
+    });
+
+    /* we use the spread operator here so that we don't mutate the state.
+    Another way to do this would be: 
+    const person = Object.assign({}, this.state.persons[personIndex]); */
+    const person = {
+      ...this.state.persons[personIndex]
+    };
+    person.name = event.target.value;
+    
+    const persons = [...this.state.persons];
+    persons[personIndex] = person;
+
+    this.setState({persons: persons});
+  }
+  //...
+
+  render() {
+    //...
+    let persons = null;
+
+    if (this.state.showPersons){
+      persons = (
+        <div>
+          {this.state.persons.map((person,index) => {
+            return <Person
+              click={() => this.deletePersonHandler(index)}
+              name={person.name}
+              age={person.age} 
+              key={person.id}
+              changed={(event) => this.nameChangedHandler(event, person.id)}/>
+          })}
+        </div>
+      );
+    }
+//...
+```
+
