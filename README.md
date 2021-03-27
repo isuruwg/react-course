@@ -30,6 +30,8 @@ My work from [React - The Complete Guide](https://www.udemy.com/course/react-the
     - [4.2.1. Lists and state](#421-lists-and-state)
     - [4.2.2. Lists and Keys](#422-lists-and-keys)
     - [4.2.3. Flexible lists](#423-flexible-lists)
+- [5. Styling React Components and Elements](#5-styling-react-components-and-elements)
+  - [5.1. Setting styles dynamically](#51-setting-styles-dynamically)
 
 # 1. Getting Started
 
@@ -713,5 +715,38 @@ class App extends Component {
       );
     }
 //...
+```
+# 5. Styling React Components and Elements
+
+## 5.1. Setting styles dynamically
+
+For inline styles, we can easily change styling by changing the elements within the style. For example, in [App.js](my-first-app/src/App.js) the style for the button is set using the `style` variable, and the style for the button can be simply made dynamic by changing the value dynamically:
+
+```javascript
+ render() {
+    const style = {
+      backgroundColor: 'green',
+      //......
+    };
+
+    let persons = null;
+
+    if (this.state.showPersons){
+      persons = (
+        //....
+      );
+      style.backgroundColor = 'red';
+    }
+
+    return (
+      <div className="App">
+        <h1>Hi, I'm a React App</h1>
+        <button 
+          style={style}
+          onClick={this.togglePersonsHandler}>Toggle Persons</button>    
+        {persons}    
+      </div>
+    );
+  }
 ```
 
