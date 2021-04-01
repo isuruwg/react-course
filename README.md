@@ -4,8 +4,9 @@ My work from [React - The Complete Guide](https://www.udemy.com/course/react-the
 
 # TOC <!-- omit in toc -->
 - [1. Getting Started](#1-getting-started)
-  - [1.1. Creating a react app](#11-creating-a-react-app)
-  - [1.2. Starting the app](#12-starting-the-app)
+  - [1.1. Installing Node](#11-installing-node)
+  - [1.2. Creating a react app](#12-creating-a-react-app)
+  - [1.3. Starting the app](#13-starting-the-app)
 - [2. Next Generation JavaScript](#2-next-generation-javascript)
 - [3. Base Features and Syntax](#3-base-features-and-syntax)
   - [3.1. Different files in the app](#31-different-files-in-the-app)
@@ -35,7 +36,12 @@ My work from [React - The Complete Guide](https://www.udemy.com/course/react-the
 
 # 1. Getting Started
 
-## 1.1. Creating a react app
+## 1.1. Installing Node
+
+If you don't have node already installed, please follow the instructions [here](https://github.com/nodesource/distributions/blob/master/README.md#installation-instructions) to install.
+
+
+## 1.2. Creating a react app
 
 You can create a new app by doing,
 
@@ -47,7 +53,7 @@ However, for the first app we'll use,
 
 This will create the same app structure as used in the course.
 
-## 1.2. Starting the app
+## 1.3. Starting the app
 
 ```
 cd my-first-app
@@ -749,4 +755,5 @@ For inline styles, we can easily change styling by changing the elements within 
     );
   }
 ```
+
 
